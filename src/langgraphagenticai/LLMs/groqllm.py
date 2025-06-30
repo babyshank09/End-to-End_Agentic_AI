@@ -10,8 +10,8 @@ class GroqLLM:
          
     def get_llm_model(self): 
         try:
-            groq_api_key = self.user_input_controls["GROQ_API_KEY"] 
-            selected_model = self.user_input_controls["selected_groq_model"]  
+            groq_api_key = self.user_controls_input["GROQ_API_KEY"] 
+            selected_model = self.user_controls_input["selected_groq_model"]  
 
             if groq_api_key == "" and os.environ["GROQ_API_KEY"] == "":  
                 st.error("⚠️ Please enter your Groq API key to proceed!") 

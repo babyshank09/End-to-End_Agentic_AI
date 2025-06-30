@@ -11,25 +11,25 @@ class LoadStreamlitUI:
         self.user_controls = {}   
 
 
-    def initialize_requirements(self): 
-        return {
-            "current_step": "requirements", 
-            "requirements": "", 
-            "user_stories": "", 
-            "po_feedback": "",
-            "generated_code": "", 
-            "review_feedback": "", 
-            "decision": None
-        }
+    # def initialize_requirements(self): 
+    #     return {
+    #         "current_step": "requirements", 
+    #         "requirements": "", 
+    #         "user_stories": "", 
+    #         "po_feedback": "",
+    #         "generated_code": "", 
+    #         "review_feedback": "", 
+    #         "decision": None
+    #     }
     
 
-    def render_requirements(self):  
-        st.markdown("## Requirements Submition")
-        st.session_state.requirements= st.text_area("Enter your requirements", height=200, key="req_input") 
+    # def render_requirements(self):  
+    #     st.markdown("## Requirements Submition")
+    #     st.session_state.requirements= st.text_area("Enter your requirements", height=200, key="req_input") 
 
-        if st.button("Submit Requirements", key= "submit_req"): 
-            st.session_state["current_state"] = "generate_user_stories" 
-            st.session_state.IsSDLC = True
+    #     if st.button("Submit Requirements", key= "submit_req"): 
+    #         st.session_state["current_state"] = "generate_user_stories" 
+    #         st.session_state.IsSDLC = True
 
     
     def load_streamlit_ui(self): 
@@ -37,7 +37,9 @@ class LoadStreamlitUI:
         st.header("🤖" + self.config.get_page_title())
         st.session_state.timeframe = ""
         st.session_state.IsFetchButtonClicked = False
-        st.session_state.IsSDLC = False
+        st.session_state.IsSDLC = False 
+        st.session_state.IsClearChatButtonClicked = False
+        st.chat_message("assistant").write("Hi, How can I assist you today?") 
 
 
         with st.sidebar:  
@@ -54,12 +56,12 @@ class LoadStreamlitUI:
                     st.warning("⚠️ Please enter your Groq API key to proceed!")  
 
             usecase_options = self.config.get_usecase_options() 
-            self.user_controls["selected_usecase"] = st.selectbox("Choose the Use Case", usecase_options)    
+            self.user_controls["selected_usecase"] = st.selectbox("Choose the Use Case", usecase_options)   
 
 
-            if "state" not in st.session_state: 
-                st.session_state.state = self.initialize_requirements() 
-            self.render_requirements()
+            # if "state" not in st.session_state: 
+            #     st.session_state.state = self.initialize_requirements() 
+            # self.render_requirements() 
             
 
         return self.user_controls
